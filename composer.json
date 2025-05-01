@@ -1,0 +1,15 @@
+{
+    "name": "hardik.sethi/agrocraft-an-e-commerce-website-for-fresh-farm-produce-vegetables-and-fruits",
+    "autoload": {
+        "psr-4": {
+            "HardikSethi\\AgrocraftAnECommerceWebsiteForFreshFarmProduceVegetablesAndFruits\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hardik Sethi",
+            "email": "hardiksethi.bt22ele@pec.edu.in"
+        }
+    ],
+    "require": {}
+}
