@@ -1,0 +1,17 @@
+{
+  "name": "agro-platform",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "services/*",
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run -ws build",
+    "dev": "npm run -ws dev",
+    "start": "npm run -ws start",
+    "lint": "npm run -ws lint",
+    "typecheck": "npm run -ws typecheck"
+  }
+}
