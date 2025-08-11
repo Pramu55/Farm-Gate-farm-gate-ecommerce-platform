@@ -1,0 +1,64 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: agrocraft
+      MYSQL_USER: agro
+      MYSQL_PASSWORD: agro
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+  auth:
+    build:
+      context: ./services/auth
+      dockerfile: Dockerfile
+    environment:
+      PORT: 4001
+      JWT_SECRET: dev-secret
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: agro
+      MYSQL_PASSWORD: agro
+      MYSQL_DATABASE: agrocraft
+    depends_on:
+      - mysql
+    ports:
+      - "4001:4001"
+  marketplace:
+    build:
+      context: ./services/marketplace
+      dockerfile: Dockerfile
+    environment:
+      PORT: 4002
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: agro
+      MYSQL_PASSWORD: agro
+      MYSQL_DATABASE: agrocraft
+    depends_on:
+      - mysql
+    ports:
+      - "4002:4002"
+  weather:
+    build:
+      context: ./services/weather
+      dockerfile: Dockerfile
+    environment:
+      PORT: 4003
+    ports:
+      - "4003:4003"
+  geo:
+    build:
+      context: ./services/geo
+      dockerfile: Dockerfile
+    environment:
+      PORT: 4004
+    ports:
+      - "4004:4004"
+volumes:
+  db-data:
